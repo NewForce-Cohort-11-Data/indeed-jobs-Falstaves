@@ -69,19 +69,31 @@
 
 -- 9a) Find the name of each company and its average star rating for all companies that have 
 -- more than 5000 reviews across all locations. 
--- 9b) How many companies are there with more that 5000 reviews across all locations? 40
+-- 9b) How many companies are there with more that 5000 reviews across all locations? 71
 
--- SELECT company, AVG("star-rating") as average_rating
+-- My original attempt:
+	-- SELECT company, AVG("star-rating") as average_rating
+	-- FROM data_analyst_jobs
+	-- WHERE review_count > 5000
+	-- AND company IS NOT NULL
+	-- AND "star-rating" IS NOT NULL
+	-- GROUP BY company
+	-- ORDER BY average_rating DESC;
+
+-- Kyle's Correct Answer:
+-- SELECT company, 
+-- 	SUM(review_count) AS num_review, 
+-- 	AVG("star-rating") AS avg_rating
 -- FROM data_analyst_jobs
--- WHERE review_count > 5000
--- AND company IS NOT NULL
+-- WHERE "star-rating" is NOT NULL
 -- GROUP BY company
--- ORDER BY average_rating DESC;
+-- HAVING SUM(review_count) > 5000
+-- ORDER BY avg_rating DESC;
 
 -- 10a) Add the code to order the query in #9 from highest to lowest average star rating. 
 -- 10b) Which company with more than 5000 reviews across all locations 
--- in the dataset has the highest star rating? Unilever
--- 10c) What is that rating? 4.2
+-- in the dataset has the highest star rating? Google
+-- 10c) What is that rating? 4.3
 
 
 -- 11a) Find all the job titles that contain the word ‘Analyst’. 
